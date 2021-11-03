@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9cd%gmyf1!7v^o+lhs85oi6r1&is3t1zou(ruheoy0kuyo95k@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -77,35 +77,28 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 from socket import gethostname
 hostname = gethostname()
 
-if "DESKTOP-P1VJK24" in hostname:
+# if DEBUG==False:
     # デバッグ環境
     # DEBUG = True 
-    # DATABASES = {
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'kakeibodb',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'postgres',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    #     }
-    # }
-    # ALLOWED_HOSTS = ['*'] 
-    import dj_database_url
-    db_from_env = dj_database_url.config()
-    DATABASES = {
-        'default': dj_database_url.config()
-    }
-    ALLOWED_HOSTS = ['*']
-else:
-    # 本番環境
-    # DEBUG = False
-    import dj_database_url
-    db_from_env = dj_database_url.config()
-    DATABASES = {
-        'default': dj_database_url.config()
-    }
-    ALLOWED_HOSTS = ['*']
+# DATABASES = {
+#     'default': {
+#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     'NAME': 'kakeibodb',
+#     'USER': 'postgres',
+#     'PASSWORD': 'postgres',
+#     'HOST': 'localhost',
+#     'PORT': '5432',
+#     }
+# }
+# 本番環境
+# DEBUG = False
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES = {
+    'default': dj_database_url.config()
+}
+ALLOWED_HOSTS = ['*']
+
 
 
 
@@ -150,3 +143,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
