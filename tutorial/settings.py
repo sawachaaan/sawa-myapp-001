@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'tutorial.urls'
@@ -80,17 +80,23 @@ hostname = gethostname()
 if "DESKTOP-P1VJK24" in hostname:
     # デバッグ環境
     # DEBUG = True 
+    # DATABASES = {
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'kakeibodb',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    #     }
+    # }
+    # ALLOWED_HOSTS = ['*'] 
+    import dj_database_url
+    db_from_env = dj_database_url.config()
     DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kakeibodb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        }
+        'default': dj_database_url.config()
     }
-    ALLOWED_HOSTS = ['*'] 
+    ALLOWED_HOSTS = ['*']
 else:
     # 本番環境
     # DEBUG = False
